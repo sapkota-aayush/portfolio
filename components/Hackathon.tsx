@@ -26,7 +26,7 @@ export default function Hackathon() {
                 className="bg-[#fefcf9] rounded-sm shadow-sm hover:shadow-md transition-all duration-300 border border-brown-300/40 p-5 md:p-6"
               >
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
-                  <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                  <div className="flex items-center gap-1 flex-1 min-w-0">
                     <div className="min-w-0 flex-1">
                       {hackathon.hackathon && (
                         <p className="text-xs sm:text-sm md:text-base font-bold text-brown-800 mb-1 break-words">{hackathon.hackathon}</p>
