@@ -19,7 +19,7 @@ export default function Contact() {
           <p className="text-xs md:text-sm text-brown-700 mb-4">
             Feel free to reach out if you&apos;d like to connect or collaborate!
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-3 flex-wrap">
+          <div className="flex flex-row justify-center gap-2 sm:gap-3 flex-wrap">
             <a
               href="/AayushSapkotaResume.docx"
               download
