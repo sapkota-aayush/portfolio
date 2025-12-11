@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { personalInfo, socialLinks } from '@/lib/constants'
 import { motion } from 'framer-motion'
 
@@ -16,7 +17,7 @@ export default function Contact() {
         >
           <h2 className="text-2xl md:text-3xl font-bold text-brown-900 mb-4">Get In Touch</h2>
           <p className="text-sm md:text-base text-brown-700 mb-6">
-            Feel free to reach out if you'd like to connect or collaborate!
+            Feel free to reach out if you&apos;d like to connect or collaborate!
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 flex-wrap">
             <a
@@ -76,11 +77,12 @@ export default function Contact() {
           {/* Signature */}
           <div className="mt-6 pt-4 border-t border-brown-300">
             <div className="flex flex-col items-end">
-              <div className="max-w-md w-full ml-auto mr-16 md:mr-32">
-                <img
+              <div className="max-w-md w-full ml-auto mr-16 md:mr-32 relative h-24">
+                <Image
                   src="/signature.png"
                   alt="Signature"
-                  className="w-full h-auto object-contain"
+                  fill
+                  className="object-contain"
                   style={{ 
                     mixBlendMode: 'multiply',
                     filter: 'contrast(1.2) brightness(0.95)',
