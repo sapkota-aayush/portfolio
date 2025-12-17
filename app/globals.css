@@ -15,6 +15,25 @@ body {
   color: #4f3d30;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+  
+  a,
+  button,
+  [role="button"],
+  input,
+  textarea,
+  select {
+    cursor: none !important;
+  }
+}
+
 .paper {
   background-color: #fefcf9;
   box-shadow: 

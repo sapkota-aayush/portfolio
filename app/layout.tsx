@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Merriweather } from 'next/font/google'
 import './globals.css'
+import CustomCursor from '@/components/CustomCursor'
 
 const merriweather = Merriweather({ 
   subsets: ['latin'],
@@ -19,7 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={merriweather.className}>{children}</body>
+      <body className={merriweather.className}>
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   )
 }
