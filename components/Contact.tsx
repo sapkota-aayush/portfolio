@@ -88,27 +88,6 @@ export default function Contact() {
               </span>
             </a>
           </div>
-          
-          {/* Signature */}
-          <div className="mt-6 pt-4 border-t border-brown-300">
-            <div className="flex flex-col items-end">
-              <div className="max-w-md w-full ml-auto mr-16 md:mr-32 relative h-24">
-                <Image
-                  src="/signature.png"
-                  alt="Signature"
-                  fill
-                  className="object-contain"
-                  style={{ 
-                    mixBlendMode: 'multiply',
-                    filter: 'contrast(1.2) brightness(0.95)',
-                  }}
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none'
-                  }}
-                />
-              </div>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>

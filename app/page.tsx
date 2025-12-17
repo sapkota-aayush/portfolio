@@ -7,6 +7,8 @@ import OpenSource from '@/components/OpenSource'
 import Leadership from '@/components/Leadership'
 import Education from '@/components/Education'
 import LifeHighlights from '@/components/LifeHighlights'
+import NFCCards from '@/components/NFCCards'
+import Hearts from '@/components/Hearts'
 import Contact from '@/components/Contact'
 import FloatingLogos from '@/components/FloatingLogos'
 import { floatingLogos } from '@/lib/constants'
@@ -22,9 +24,11 @@ export default function Home() {
       <Experience />
       <OpenSource />
       <Leadership />
+      <NFCCards />
       <Education />
       <LifeHighlights />
       <Contact />
+      <Hearts />
     </main>
   )
 }
