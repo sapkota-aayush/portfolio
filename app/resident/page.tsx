@@ -79,50 +79,86 @@ export default function ResidentPage() {
 
   return (
     <div className="min-h-screen bg-red-50 py-4 px-3 sm:py-6 sm:px-4 md:py-8 md:px-6">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <div className="bg-white shadow-md border-2 border-red-200 rounded-lg p-4 sm:p-6 md:p-8">
-          {/* Header */}
-          <div className="text-center mb-4 sm:mb-6">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-red-700 mb-1">
-              Cataraqui Heights Residence
-            </h2>
-          </div>
-
-          {/* Resident Photo */}
-          <div className="flex justify-center mb-4 sm:mb-6">
-            <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-red-500 shadow-lg">
-              <Image
-                src="/old man photo.avif"
-                alt="Resident Photo"
-                fill
-                className="object-cover"
-                priority
-              />
+          {/* Header with Logo */}
+          <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between mb-6 sm:mb-8 pb-4 border-b-2 border-red-200">
+            <div className="flex items-center gap-3 mb-3 sm:mb-0">
+              {/* Logo placeholder - replace with actual logo image when available */}
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg sm:text-xl">CHR</span>
+              </div>
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-red-700">
+                Cataraqui Heights Residence
+              </h2>
             </div>
           </div>
 
-          {/* Resident Details */}
-          <div className="text-center mb-6 sm:mb-8">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-red-900 mb-2">
-              John Doe
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-red-700 mb-3 sm:mb-4">
-              Room 205
-            </p>
-            <div className="mt-3 sm:mt-4">
-              <span className={`inline-block px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold ${
-                status === 'in' 
-                  ? 'bg-red-100 text-red-800 border-2 border-red-400' 
-                  : 'bg-red-50 text-red-700 border-2 border-red-300'
-              }`}>
-                {status === 'in' ? '✓ Signed In' : '○ Signed Out'}
-              </span>
+          {/* Resident Photo and Info Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+            {/* Resident Photo - Rectangular */}
+            <div className="md:col-span-1 flex justify-center md:justify-start">
+              <div className="relative w-full max-w-xs sm:max-w-sm md:w-full aspect-[3/4] rounded-lg overflow-hidden border-4 border-red-500 shadow-lg">
+                <Image
+                  src="/old man photo.avif"
+                  alt="Resident Photo"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </div>
-            {lastLog && (
-              <p className="text-xs sm:text-sm text-red-600 mt-2 sm:mt-3 px-2">
-                Last {lastLog.action === 'in' ? 'signed in' : 'signed out'}: {lastLog.timestamp}
-              </p>
-            )}
+
+            {/* Resident Details */}
+            <div className="md:col-span-2 space-y-3 sm:space-y-4">
+              <div>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-900 mb-1">
+                  John Doe
+                </h1>
+                <p className="text-base sm:text-lg md:text-xl text-red-700 font-semibold">
+                  Room 205
+                </p>
+              </div>
+
+              {/* Status Badge */}
+              <div>
+                <span className={`inline-block px-4 py-2 rounded-full text-sm sm:text-base font-semibold ${
+                  status === 'in' 
+                    ? 'bg-red-100 text-red-800 border-2 border-red-400' 
+                    : 'bg-red-50 text-red-700 border-2 border-red-300'
+                }`}>
+                  {status === 'in' ? '✓ Signed In' : '○ Signed Out'}
+                </span>
+              </div>
+
+              {/* Additional Details */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2">
+                <div className="bg-red-50 p-3 rounded-lg border border-red-200">
+                  <p className="text-xs sm:text-sm text-red-600 font-medium mb-1">Date of Birth</p>
+                  <p className="text-sm sm:text-base text-red-900 font-semibold">January 15, 1945</p>
+                </div>
+                <div className="bg-red-50 p-3 rounded-lg border border-red-200">
+                  <p className="text-xs sm:text-sm text-red-600 font-medium mb-1">Phone</p>
+                  <p className="text-sm sm:text-base text-red-900 font-semibold">(613) 555-0123</p>
+                </div>
+                <div className="bg-red-50 p-3 rounded-lg border border-red-200">
+                  <p className="text-xs sm:text-sm text-red-600 font-medium mb-1">Emergency Contact</p>
+                  <p className="text-sm sm:text-base text-red-900 font-semibold">Jane Doe</p>
+                </div>
+                <div className="bg-red-50 p-3 rounded-lg border border-red-200">
+                  <p className="text-xs sm:text-sm text-red-600 font-medium mb-1">Emergency Phone</p>
+                  <p className="text-sm sm:text-base text-red-900 font-semibold">(613) 555-0124</p>
+                </div>
+              </div>
+
+              {lastLog && (
+                <div className="pt-2">
+                  <p className="text-xs sm:text-sm text-red-600">
+                    <span className="font-semibold">Last {lastLog.action === 'in' ? 'signed in' : 'signed out'}:</span> {lastLog.timestamp}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Action Buttons */}
