@@ -21,7 +21,7 @@ export default function Contact() {
           </p>
           <div className="flex flex-row justify-center gap-2 sm:gap-3 flex-wrap">
             <a
-              href="/AayushSapkotaResume.docx"
+              href="/ResumeAayush.docx"
               download
               title="Download Resume"
               className="relative flex items-center justify-center w-10 h-10 bg-brown-600 text-white rounded hover:bg-brown-700 transition-colors group"
