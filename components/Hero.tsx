@@ -1,12 +1,22 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import { personalInfo, socialLinks } from '@/lib/constants'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Hero() {
+  const [showResumePopup, setShowResumePopup] = useState(false)
+  
+  const handleQuickLook = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    setShowResumePopup(false)
+    // Open PDF in new tab - browsers can display PDFs inline
+    window.open('/ResumeAayushSapkota.pdf', '_blank', 'noopener,noreferrer')
+  }
+
   return (
-    <section className="py-6 md:py-8 px-4">
+    <section id="hero" className="py-6 md:py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -76,10 +86,83 @@ export default function Hero() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </a>
+                <button
+                  onClick={() => setShowResumePopup(true)}
+                  className="text-brown-700 hover:text-brown-900 transition-colors p-2 -m-2"
+                  aria-label="Resume"
+                >
+                  <svg className="w-6 h-6 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </button>
               </div>
             </div>
         </motion.div>
       </div>
+
+      {/* Resume Popup */}
+      <AnimatePresence>
+        {showResumePopup && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4"
+              onClick={() => setShowResumePopup(false)}
+            >
+              {/* Popup */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                className="bg-[#fefcf9] rounded-lg shadow-2xl border border-brown-300/40 p-6 max-w-sm w-full"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-bold text-brown-900">Resume</h3>
+                  <button
+                    onClick={() => setShowResumePopup(false)}
+                    className="text-brown-600 hover:text-brown-900 transition-colors"
+                    aria-label="Close"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="flex flex-col gap-3">
+                  <a
+                    href="#"
+                    onClick={handleQuickLook}
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 bg-brown-600 text-white rounded-md hover:bg-brown-700 transition-colors font-semibold text-sm shadow-md hover:shadow-lg"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    Quick Look
+                  </a>
+                  <a
+                    href="/ResumeAayush.docx"
+                    download
+                    onClick={() => setShowResumePopup(false)}
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 bg-brown-500 text-white rounded-md hover:bg-brown-600 transition-colors font-semibold text-sm shadow-md hover:shadow-lg"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Download
+                  </a>
+                </div>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

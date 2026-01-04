@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 export default function Projects() {
   return (
-    <section className="py-6 md:py-8 px-4">
+    <section id="projects" className="py-6 md:py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -23,7 +23,7 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="group relative bg-[#fefcf9] rounded-sm shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-brown-300/40"
+                className="group relative bg-[#fefcf9] rounded-sm shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-brown-300/40 flex flex-col h-full"
               >
                 {/* Image/Video Preview */}
                 {(project.image || project.video) && (
@@ -54,20 +54,34 @@ export default function Projects() {
                         </div>
                       </div>
                     ) : null}
-                    {project.featured && (
-                      <div className="absolute top-4 right-4 bg-brown-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                        ⭐ Featured
-                      </div>
-                    )}
+                    <div className="absolute top-4 right-4 flex gap-2">
+                      {project.beta && (
+                        <div className="relative bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg overflow-hidden">
+                          <span className="relative z-10">Beta</span>
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                        </div>
+                      )}
+                      {project.featured && (
+                        <div className="bg-brown-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                          ⭐ Featured
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
 
                 {/* Content */}
-                <div className="p-5 md:p-6">
+                <div className="p-5 md:p-6 flex flex-col flex-1">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
-                    <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-brown-900 group-hover:text-brown-700 transition-colors break-words">
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-brown-900 group-hover:text-brown-700 transition-colors break-words flex items-center gap-2">
                         {project.name}
+                        {project.beta && (
+                          <span className="relative px-2 py-0.5 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 text-white text-xs rounded-full font-semibold shadow-md overflow-hidden">
+                            <span className="relative z-10">Beta</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                          </span>
+                        )}
                       </h3>
                       {project.logo && (
                         <motion.div
@@ -109,19 +123,19 @@ export default function Projects() {
                   </div>
 
                   {Array.isArray(project.description) ? (
-                    <ul className="list-disc list-inside text-sm md:text-base text-brown-700 mb-4 leading-relaxed space-y-1">
+                    <ul className="list-disc list-inside text-sm md:text-base text-brown-700 mb-4 leading-relaxed space-y-1 flex-1">
                       {project.description.map((point, descIndex) => (
                         <li key={descIndex}>{point}</li>
                       ))}
                     </ul>
                   ) : (
-                    <p className="text-sm md:text-base text-brown-700 mb-4 leading-relaxed">
+                    <p className="text-sm md:text-base text-brown-700 mb-4 leading-relaxed flex-1">
                       {project.description}
                     </p>
                   )}
 
                   {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-2 mb-4 flex-shrink-0">
                     {project.technologies.slice(0, 4).map((tech, techIndex) => (
                       <span
                         key={techIndex}
@@ -138,7 +152,7 @@ export default function Projects() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-wrap gap-2 sm:gap-3">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 flex-shrink-0 mt-auto">
                     {project.liveDemo && (
                       <a
                         href={project.liveDemo}

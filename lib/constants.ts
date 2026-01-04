@@ -62,6 +62,18 @@ export const experience = [
 
 export const projects = [
   {
+    name: "Vojur",
+    description: "Voice-first journaling app using OpenAI Realtime API for natural conversations with an AI companion. Features semantic memory integration, calendar-based entry management, and context-aware responses powered by Next.js and Supabase.",
+    technologies: ["Next.js", "OpenAI Realtime API", "Supabase", "mem0", "TypeScript"],
+    github: "https://github.com/sapkota-aayush",
+    liveDemo: "https://voice.aayussh.com/",
+    image: "", // Add image path when available
+    video: "", // Add video URL when available
+    logo: "/vojurlogo.png", // Floating logo
+    featured: true, // Main project
+    beta: true, // Beta version
+  },
+  {
     name: "Dumps.online",
     description: [
       "An anonymous platform built for St. Lawrence College students",
@@ -84,6 +96,17 @@ export const projects = [
     video: "", // Add video recording URL when available
     image: "", // Add screenshot/image when available
     logo: "/folderly.png", // Floating logo
+  },
+  {
+    name: "SLC Indoor Navigation",
+    description: "Graph-based indoor navigation system using BFS and Dijkstra's algorithms for shortest path calculation across multi-floor college buildings with 100+ locations. Developed Flask REST API backend with React frontend, integrating OpenAI GPT-4 for natural language location processing and visual photo-sequence route generation. Implemented weighted graph pathfinding to optimize route selection between stairs and elevators. Yet in progress.",
+    technologies: ["Flask", "React", "OpenAI GPT-4", "BFS", "Dijkstra's Algorithm", "Graph Algorithms", "Python"],
+    github: "https://github.com/sapkota-aayush",
+    liveDemo: "", // In progress
+    image: "", // No image preview
+    video: "", // Add video URL when available
+    logo: "/slc-navigation.jpg", // Floating logo
+    featured: false,
   },
 ];
 

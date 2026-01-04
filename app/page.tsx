@@ -10,12 +10,14 @@ import LifeHighlights from '@/components/LifeHighlights'
 import NFCCards from '@/components/NFCCards'
 import Hearts from '@/components/Hearts'
 import Contact from '@/components/Contact'
+import Navigation from '@/components/Navigation'
 import FloatingLogos from '@/components/FloatingLogos'
 import { floatingLogos } from '@/lib/constants'
 
 export default function Home() {
   return (
-    <main className="min-h-screen py-4 md:py-8 relative">
+    <main className="min-h-screen py-4 md:py-8 relative pb-20 md:pb-8">
+      <Navigation />
       {floatingLogos.length > 0 && <FloatingLogos logos={floatingLogos} />}
       <Hero />
       <About />

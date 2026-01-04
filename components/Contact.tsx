@@ -1,12 +1,11 @@
 'use client'
 
-import Image from 'next/image'
-import { personalInfo, socialLinks } from '@/lib/constants'
+import { socialLinks } from '@/lib/constants'
 import { motion } from 'framer-motion'
 
 export default function Contact() {
   return (
-    <section className="py-6 md:py-8 px-4">
+    <section id="contact" className="py-6 md:py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -20,19 +19,6 @@ export default function Contact() {
             Feel free to reach out if you&apos;d like to connect or collaborate!
           </p>
           <div className="flex flex-row justify-center gap-2 sm:gap-3 flex-wrap">
-            <a
-              href="/ResumeAayush.docx"
-              download
-              title="Download Resume"
-              className="relative flex items-center justify-center w-10 h-10 bg-brown-600 text-white rounded hover:bg-brown-700 transition-colors group"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-brown-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                Download Resume
-              </span>
-            </a>
             <a
               href={`mailto:${socialLinks.email}`}
               title="Email Me"

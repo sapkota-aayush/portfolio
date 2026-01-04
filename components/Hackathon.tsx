@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 export default function Hackathon() {
   return (
-    <section className="py-6 md:py-8 px-4">
+    <section id="hackathons" className="py-6 md:py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
