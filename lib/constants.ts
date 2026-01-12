@@ -102,7 +102,7 @@ export const projects = [
     description: "Graph-based indoor navigation system using BFS and Dijkstra's algorithms for shortest path calculation across multi-floor college buildings with 100+ locations. Developed Flask REST API backend with React frontend, integrating OpenAI GPT-4 for natural language location processing and visual photo-sequence route generation. Implemented weighted graph pathfinding to optimize route selection between stairs and elevators. Yet in progress.",
     technologies: ["Flask", "React", "OpenAI GPT-4", "BFS", "Dijkstra's Algorithm", "Graph Algorithms", "Python"],
     github: "https://github.com/sapkota-aayush",
-    liveDemo: "", // In progress
+    liveDemo: "https://slcnavigation.aayussh.com/",
     image: "", // No image preview
     video: "", // Add video URL when available
     logo: "/slc-navigation.jpg", // Floating logo
