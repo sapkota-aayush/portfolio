@@ -160,7 +160,7 @@ export const hackathons = [
     hackathon: "King's Hack by The AI Collective Kingston (Mayor's Cup)",
     description: "A prototype to improve access to Kingston 311 information for City of Kingston. Features include an AI-powered chat assistant for common 311 questions, a 'Latest Information' view for city updates, official source citations under every response, accessibility features (English/French, voice input, text-to-speech), and a reporting feature for incorrect or outdated responses.",
     technologies: ["LangChain", "mem0", "AI", "React", "TypeScript", "Accessibility"],
-    image: "",
+    image: "/Kingshacklogo.png",
     projectLink: "https://lnkd.in/eGeVAups",
     devPostLink: "",
     github: "",
