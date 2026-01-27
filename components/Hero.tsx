@@ -12,7 +12,7 @@ export default function Hero() {
     e.preventDefault()
     setShowResumePopup(false)
     // Open PDF in new tab - browsers can display PDFs inline
-    window.open('/ResumeAayushSapkota.pdf', '_blank', 'noopener,noreferrer')
+    window.open('/ResumeAayush.pdf', '_blank', 'noopener,noreferrer')
   }
 
   return (

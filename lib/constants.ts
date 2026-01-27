@@ -62,7 +62,20 @@ export const experience = [
 
 export const projects = [
   {
+    name: "SLC Indoor Navigation",
+    period: "Ongoing",
+    description: "Graph-based indoor navigation system using BFS and Dijkstra's algorithms for shortest path calculation across multi-floor college buildings with 100+ locations. Developed Flask REST API backend with React frontend, integrating OpenAI GPT-4 for natural language location processing and visual photo-sequence route generation. Implemented weighted graph pathfinding to optimize route selection between stairs and elevators. Yet in progress.",
+    technologies: ["Flask", "React", "OpenAI GPT-4", "BFS", "Dijkstra's Algorithm", "Graph Algorithms", "Python"],
+    github: "https://github.com/sapkota-aayush",
+    liveDemo: "https://slcnavigation.aayussh.com/",
+    image: "", // No image preview
+    video: "", // Add video URL when available
+    logo: "/slc-navigation.jpg", // Floating logo
+    featured: false,
+  },
+  {
     name: "Vojur",
+    period: "Ongoing",
     description: "Voice-first journaling app using OpenAI Realtime API for natural conversations with an AI companion. Features semantic memory integration, calendar-based entry management, and context-aware responses powered by Next.js and Supabase.",
     technologies: ["Next.js", "OpenAI Realtime API", "Supabase", "mem0", "TypeScript"],
     github: "https://github.com/sapkota-aayush",
@@ -75,6 +88,7 @@ export const projects = [
   },
   {
     name: "Dumps.online",
+    period: "2025",
     description: [
       "An anonymous platform built for St. Lawrence College students",
       "Used by 100+ students during launch",
@@ -90,23 +104,14 @@ export const projects = [
   },
   {
     name: "Folderly-Prototype",
+    period: "2025",
     description: "Console Python package for AI-powered file organization using natural language. Uses OpenAI function calling, threading, and OS file management for intelligent file path handling and organization.",
     technologies: ["Python", "OpenAI GPT-3", "Poetry", "Threading", "OS File Management"],
     github: "https://github.com/sapkota-aayush/Folderly-Prototype",
+    downloadLink: "https://github.com/sapkota-aayush/Folderly-Prototype",
     video: "", // Add video recording URL when available
     image: "", // Add screenshot/image when available
     logo: "/folderly.png", // Floating logo
-  },
-  {
-    name: "SLC Indoor Navigation",
-    description: "Graph-based indoor navigation system using BFS and Dijkstra's algorithms for shortest path calculation across multi-floor college buildings with 100+ locations. Developed Flask REST API backend with React frontend, integrating OpenAI GPT-4 for natural language location processing and visual photo-sequence route generation. Implemented weighted graph pathfinding to optimize route selection between stairs and elevators. Yet in progress.",
-    technologies: ["Flask", "React", "OpenAI GPT-4", "BFS", "Dijkstra's Algorithm", "Graph Algorithms", "Python"],
-    github: "https://github.com/sapkota-aayush",
-    liveDemo: "https://slcnavigation.aayussh.com/",
-    image: "", // No image preview
-    video: "", // Add video URL when available
-    logo: "/slc-navigation.jpg", // Floating logo
-    featured: false,
   },
 ];
 
@@ -138,6 +143,7 @@ export const hackathons = [
   {
     name: "Love Is Blind (RedFlagr)",
     hackathon: "Queen's Stupid Hackathon",
+    period: "Nov 2025",
     description: "A dating app that matches people based on their worst traits and red flags. Users swipe through unfiltered profiles, select fun badges, and embrace honesty over perfection.",
     technologies: ["FastAPI", "Next.js", "Python", "React", "Tailwind", "TypeScript"],
     image: "/LoveIsBlind.png",
@@ -148,6 +154,7 @@ export const hackathons = [
   {
     name: "NGMI",
     hackathon: "Toronto Stupid Ideas Hackathon",
+    period: "Oct 2025",
     description: "An anti-productivity app that destroys your focus with popups, memes, and chaos. Built to fight back against hustle culture by interrupting workflows and hijacking attention.",
     technologies: ["Python", "Tkinter", "easygui", "AppleScript", "psutil", "AppKit"],
     image: "/NGMI.png",
@@ -158,12 +165,37 @@ export const hackathons = [
   {
     name: "Kingston 311 AI Assistant",
     hackathon: "King's Hack by The AI Collective Kingston (Mayor's Cup)",
+    period: "Jan 2026",
     description: "A prototype to improve access to Kingston 311 information for City of Kingston. Features include an AI-powered chat assistant for common 311 questions, a 'Latest Information' view for city updates, official source citations under every response, accessibility features (English/French, voice input, text-to-speech), and a reporting feature for incorrect or outdated responses.",
     technologies: ["LangChain", "mem0", "AI", "React", "TypeScript", "Accessibility"],
-    image: "/Kingshacklogo.png",
+    image: "/city of kingston.webp",
     projectLink: "https://lnkd.in/eGeVAups",
     devPostLink: "",
     github: "",
+  },
+  {
+    name: "McHacks X Backboard",
+    hackathon: "McHacks",
+    period: "2026",
+    description: "Voice-first journaling app using OpenAI Realtime API for natural conversations with an AI companion. Features semantic memory integration, calendar-based entry management, and context-aware responses powered by Next.js and Supabase.",
+    technologies: ["Next.js", "OpenAI Realtime API", "Supabase", "mem0", "TypeScript"],
+    image: "/vojurlogo.png",
+    projectLink: "https://youtu.be/wQ7zC5duaws?si=eGpU1GCfERASJAPf",
+    devPostLink: "",
+    github: "https://github.com/sapkota-aayush",
+    video: "",
+  },
+  {
+    name: "QHACKS Upcoming",
+    hackathon: "QHACKS at Queen's University",
+    period: "Feb 2026",
+    description: "Excited to participate in this upcoming hackathon.",
+    technologies: [],
+    image: "/original.png",
+    projectLink: "",
+    devPostLink: "",
+    github: "",
+    video: "",
   },
 ];
 
