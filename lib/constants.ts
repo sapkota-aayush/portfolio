@@ -139,7 +139,21 @@ export const openSource = [
   },
 ];
 
-export const hackathons = [
+export interface HackathonItem {
+  name: string;
+  hackathon: string;
+  period: string;
+  description: string | string[];
+  technologies: string[];
+  image: string;
+  projectLink?: string;
+  devPostLink?: string;
+  github?: string;
+  video?: string;
+  achievement?: string; // Make achievement an optional string
+}
+
+export const hackathons: HackathonItem[] = [
   {
     name: "Love Is Blind (RedFlagr)",
     hackathon: "Queen's Stupid Hackathon",
