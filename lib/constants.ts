@@ -18,7 +18,7 @@ export const education = {
   institution: "St. Lawrence College",
   location: "Kingston, ON",
   degree: "Advanced Diploma, Computer Programming and Analysis",
-  period: "Sep 2023 – Apr 2026",
+  period: "Sep 2023 – Dec 2025",
   status: "Current",
 };
 
@@ -29,12 +29,7 @@ export const experience = [
     location: "Kingston, ON (Hybrid)",
     period: "Aug 2025 – Present",
     type: "Internship",
-    description: [
-      "Modernized legacy Pentaho ETL workflows for annual tax slip generation (T4, T3, etc.)",
-      "Converted workflows into containerized Spring Boot microservices on Docker",
-      "Automated job execution using container orchestration",
-      "Migrated data pipelines and storage to GCP (Cloud Storage, Cloud SQL, Pub/Sub)",
-    ],
+    description: "Modernized and containerized data pipelines, and migrated to cloud infrastructure.",
   },
   {
     title: "Peer Tutor",
@@ -42,22 +37,14 @@ export const experience = [
     location: "Remote",
     period: "Oct 2024 – Present",
     type: "Freelance",
-    description: [
-      "Tutored students in Arduino and programming fundamentals",
-      "Assisted in project development and troubleshooting",
-    ],
-  },
+    description: "Tutored students in Arduino and programming fundamentals, assisting in project development and troubleshooting.",  },
   {
     title: "Website Coordinator",
     company: "Sustainable Kingston",
     location: "Hybrid",
     period: "Aug 2024 – Apr 2025",
     type: "Contract",
-    description: [
-      "Managed website content, design, and technical issues",
-      "Handled analytics and community engagement",
-    ],
-  },
+    description: "Managed website content, design, and technical issues for Sustainable Kingston, handling analytics and community engagement.",  },
 ];
 
 export const projects = [
