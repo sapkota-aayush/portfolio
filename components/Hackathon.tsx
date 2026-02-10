@@ -54,7 +54,15 @@ export default function Hackathon() {
                       )}
                     </motion.div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-base md:text-lg font-semibold text-brown-800">{hackathon.name}</p>
+                      <p className="text-base md:text-lg font-semibold text-brown-800 flex items-center gap-2">
+                        {hackathon.name}
+                        {'achievement' in hackathon && hackathon.achievement && (
+                          <span className="relative px-2 py-0.5 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 text-white text-xs rounded-full font-semibold shadow-md overflow-hidden">
+                            <span className="relative z-10">Winner</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                          </span>
+                        )}
+                      </p>
                       <p className="text-sm md:text-base text-brown-600">
                         {hackathon.hackathon}
                         {hackathon.period && ` • ${hackathon.period}`}
