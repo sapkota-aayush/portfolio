@@ -4,12 +4,22 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from '@/lib/supabase'
 
+const DEFAULT_LIKES = 20
+const MAX_LIKES = 9_999_999
+
+function sanitizeLikeCount(raw: unknown): number {
+  const n = typeof raw === 'number' ? raw : Number(raw)
+  if (!Number.isFinite(n) || n < 0 || n > MAX_LIKES) {
+    return DEFAULT_LIKES
+  }
+  return Math.floor(n)
+}
+
 export default function Hearts() {
-  const [heartCount, setHeartCount] = useState(20) // Start with 20 likes
+  const [heartCount, setHeartCount] = useState(DEFAULT_LIKES)
   const [isAnimating, setIsAnimating] = useState(false)
 
   useEffect(() => {
-    // Fetch current like count from Supabase
     fetchHeartCount()
   }, [])
 
@@ -20,13 +30,13 @@ export default function Hearts() {
         .select('count')
         .single()
 
-      if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
+      if (error && error.code !== 'PGRST116') {
         console.error('Error fetching heart count:', error)
         return
       }
 
-      if (data) {
-        setHeartCount(data.count || 20)
+      if (data && data.count != null) {
+        setHeartCount(sanitizeLikeCount(data.count))
       }
     } catch (error) {
       console.error('Error fetching heart count:', error)
@@ -37,11 +47,10 @@ export default function Hearts() {
     if (isAnimating) return
 
     setIsAnimating(true)
-    const newCount = heartCount + 1
+    const safeBase = sanitizeLikeCount(heartCount)
+    const newCount = Math.min(MAX_LIKES, safeBase + 1)
     setHeartCount(newCount)
 
-    // Try to update Supabase, but don't revert if it fails
-    // This allows the feature to work even if Supabase isn't set up
     try {
       const { error } = await supabase
         .from('hearts')
@@ -49,104 +58,99 @@ export default function Hearts() {
 
       if (error) {
         console.error('Error updating like count in Supabase:', error)
-        // Don't revert - keep the local increment
       }
     } catch (error) {
       console.error('Error updating like count:', error)
-      // Don't revert - keep the local increment
     }
 
     setTimeout(() => {
       setIsAnimating(false)
-    }, 500) // Reduced timeout for faster repeated clicks
+    }, 500)
   }
 
   return (
-    <div className="py-2 px-4">
-      <div className="max-w-4xl mx-auto">
+    <section
+      className="mt-12 border-t border-line/80 px-4 py-10"
+      aria-label="Portfolio likes"
+    >
+      <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-8">
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="flex items-center justify-center gap-3"
+          transition={{ duration: 0.35 }}
+          className="flex items-center gap-4"
         >
-          <div className="flex flex-col items-center gap-1">
-            <button
-              onClick={handleHeartClick}
-              disabled={isAnimating}
-              className={`relative group ${
-                isAnimating ? 'cursor-wait' : 'cursor-pointer hover:scale-110'
-              } transition-transform duration-300`}
-              aria-label="Leave a like"
-            >
-            <motion.div
-              animate={isAnimating ? {
-                scale: [1, 1.3, 1],
-                rotate: [0, 8, -8, 0],
-              } : {}}
-              transition={{ duration: 0.5 }}
-              className="relative"
+          <button
+            type="button"
+            onClick={handleHeartClick}
+            disabled={isAnimating}
+            className={`relative rounded-full border border-line/90 bg-elevated p-3 shadow-sm transition hover:border-red-300/60 dark:hover:border-red-500/40 ${
+              isAnimating ? 'cursor-wait' : 'cursor-pointer hover:scale-105 active:scale-95'
+            }`}
+            aria-label="Leave a like"
+          >
+            <motion.span
+              animate={
+                isAnimating
+                  ? { scale: [1, 1.15, 1], rotate: [0, 6, -6, 0] }
+                  : {}
+              }
+              transition={{ duration: 0.45 }}
+              className="relative flex h-10 w-10 items-center justify-center"
             >
               <svg
-                className="w-8 h-8 md:w-10 md:h-10 fill-red-400 group-hover:fill-red-500 transition-colors"
+                className="h-8 w-8 fill-red-500 transition-colors dark:fill-red-400"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
+                aria-hidden
               >
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
               </svg>
-            </motion.div>
+            </motion.span>
 
-            {/* Floating hearts animation */}
             <AnimatePresence>
               {isAnimating && (
                 <>
-                  {[...Array(3)].map((_, i) => (
-                    <motion.div
+                  {[0, 1, 2].map((i) => (
+                    <motion.span
                       key={i}
                       initial={{ opacity: 1, scale: 0, y: 0 }}
                       animate={{
                         opacity: [1, 0],
-                        scale: [0, 1.2],
-                        y: -30 - i * 8,
-                        x: (i - 1) * 15,
+                        scale: [0, 1.1],
+                        y: -28 - i * 6,
+                        x: (i - 1) * 12,
                       }}
                       exit={{ opacity: 0 }}
-                      transition={{
-                        duration: 0.8,
-                        delay: i * 0.1,
-                      }}
-                      className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                      transition={{ duration: 0.75, delay: i * 0.08 }}
+                      className="pointer-events-none absolute inset-0 flex items-center justify-center"
                     >
                       <svg
-                        className="w-5 h-5 fill-red-500"
+                        className="h-4 w-4 fill-red-500 dark:fill-red-400"
                         viewBox="0 0 24 24"
+                        aria-hidden
                       >
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                       </svg>
-                    </motion.div>
+                    </motion.span>
                   ))}
                 </>
               )}
             </AnimatePresence>
           </button>
-          <p className="text-xs text-brown-500 opacity-70 animate-pulse">Tap</p>
-          </div>
 
-          <div className="text-center">
-            <p className="text-xs md:text-sm text-brown-700 mb-1">
-              Show some love
-            </p>
-            <p className="text-lg md:text-xl font-bold text-brown-900">
-              {heartCount.toLocaleString()}
-            </p>
-            <p className="text-brown-600 text-xs">
+          <div className="text-left">
+            <p className="text-xs font-medium uppercase tracking-wider text-ink-subtle">
               Likes
             </p>
+            <p className="text-2xl font-semibold tabular-nums text-ink">
+              {heartCount.toLocaleString()}
+            </p>
+            <p className="text-xs text-ink-muted">Tap the heart</p>
           </div>
         </motion.div>
       </div>
-    </div>
+    </section>
   )
 }
-

@@ -2,63 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-surface: 249 249 249;
+  --color-elevated: 255 255 255;
+  --color-ink: 17 17 17;
+  --color-ink-muted: 55 55 55;
+  --color-ink-subtle: 115 115 115;
+  --color-line: 228 228 231;
+  --color-tint: 239 246 255;
+}
+
+.dark {
+  --color-surface: 18 18 20;
+  --color-elevated: 30 30 34;
+  --color-ink: 250 250 250;
+  --color-ink-muted: 212 212 216;
+  --color-ink-subtle: 161 161 170;
+  --color-line: 48 48 54;
+  --color-tint: 30 36 48;
+}
+
 body {
-  background-color: #fefcf9;
-  background-image: 
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(139, 107, 79, 0.03) 2px,
-      rgba(139, 107, 79, 0.03) 4px
-    );
-  color: #4f3d30;
+  @apply bg-surface text-ink antialiased;
+  background-image: radial-gradient(
+    circle at center,
+    rgb(var(--color-ink) / 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  html,
-  body,
-  *,
-  *::before,
-  *::after {
-    cursor: none !important;
+.dark body {
+  background-image: radial-gradient(
+    circle at center,
+    rgb(255 255 255 / 0.06) 1px,
+    transparent 1px
+  );
+}
+
+@layer components {
+  .card-surface {
+    @apply bg-elevated border border-line/90 rounded-xl shadow-sm;
   }
-  
-  a,
-  button,
-  [role="button"],
-  input,
-  textarea,
-  select {
-    cursor: none !important;
+
+  .link-inline {
+    @apply text-ink-muted underline decoration-line/80 underline-offset-2 transition-colors hover:text-ink;
   }
-}
 
-.paper {
-  background-color: #fefcf9;
-  box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.12),
-    0 1px 2px rgba(0, 0, 0, 0.24),
-    inset 0 0 0 1px rgba(139, 107, 79, 0.1);
-  position: relative;
-}
-
-.paper::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  background-image: 
-    repeating-linear-gradient(
-      transparent,
-      transparent 31px,
-      rgba(139, 107, 79, 0.05) 31px,
-      rgba(139, 107, 79, 0.05) 32px
-    );
-  pointer-events: none;
-  opacity: 0.3;
+  .list-bullet-blue {
+    @apply relative pl-5 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-sm before:bg-blue-600 dark:before:bg-blue-500;
+  }
 }
 
 @keyframes shimmer {
@@ -73,4 +66,3 @@ body {
 .animate-shimmer {
   animation: shimmer 2s infinite;
 }
-

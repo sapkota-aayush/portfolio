@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import SectionHeading from '@/components/SectionHeading'
 
 interface Highlight {
   image: string
@@ -60,15 +61,15 @@ export default function LifeHighlights() {
   }
 
   return (
-    <section className="py-6 md:py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+    <section id="highlights" className="px-4 py-10 md:py-12">
+      <div className="mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-brown-900 mb-6">Life Highlights</h2>
+          <SectionHeading>Life highlights</SectionHeading>
           
           <div className="relative h-[250px] md:h-[300px] mb-4 max-w-lg mx-auto">
             {/* Stacked photos effect */}
@@ -142,7 +143,7 @@ export default function LifeHighlights() {
                     }}
                     onClick={() => goToSlide(index)}
                   >
-                    <div className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl bg-brown-100">
+                    <div className="relative h-full w-full overflow-hidden rounded-lg bg-tint shadow-2xl">
                       <Image
                         src={highlight.image}
                         alt={highlight.title}
@@ -169,7 +170,7 @@ export default function LifeHighlights() {
             {/* Navigation arrows */}
             <button
               onClick={goToPrevious}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-white/80 hover:bg-white text-brown-900 rounded-full p-2 shadow-lg transition-all"
+              className="absolute left-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-elevated/90 p-2 text-ink shadow-lg backdrop-blur-sm transition-all hover:bg-elevated"
               aria-label="Previous slide"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -178,7 +179,7 @@ export default function LifeHighlights() {
             </button>
             <button
               onClick={goToNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-white/80 hover:bg-white text-brown-900 rounded-full p-2 shadow-lg transition-all"
+              className="absolute right-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-elevated/90 p-2 text-ink shadow-lg backdrop-blur-sm transition-all hover:bg-elevated"
               aria-label="Next slide"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,8 +196,8 @@ export default function LifeHighlights() {
                 onClick={() => goToSlide(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex
-                    ? 'bg-brown-600 w-8'
-                    : 'bg-brown-300 hover:bg-brown-400'
+                    ? 'w-8 bg-blue-600 dark:bg-blue-500'
+                    : 'bg-line hover:bg-line/80'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />

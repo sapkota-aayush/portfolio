@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -7,7 +8,18 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        script: ['var(--font-caveat)', 'cursive'],
+      },
       colors: {
+        surface: 'rgb(var(--color-surface) / <alpha-value>)',
+        elevated: 'rgb(var(--color-elevated) / <alpha-value>)',
+        ink: 'rgb(var(--color-ink) / <alpha-value>)',
+        'ink-muted': 'rgb(var(--color-ink-muted) / <alpha-value>)',
+        'ink-subtle': 'rgb(var(--color-ink-subtle) / <alpha-value>)',
+        line: 'rgb(var(--color-line) / <alpha-value>)',
+        tint: 'rgb(var(--color-tint) / <alpha-value>)',
         brown: {
           50: '#faf8f5',
           100: '#f5f0e8',
@@ -25,4 +37,3 @@ module.exports = {
   },
   plugins: [],
 }
-

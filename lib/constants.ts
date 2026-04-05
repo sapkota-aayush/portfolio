@@ -29,7 +29,7 @@ export const experience = [
     location: "Kingston, ON (Hybrid)",
     period: "Aug 2025 – Present",
     type: "Internship",
-    description: "Modernized and containerized data pipelines, and migrated to cloud infrastructure.",
+    description: "Pipelines, containers, and cloud migration.",
   },
   {
     title: "Peer Tutor",
@@ -37,22 +37,24 @@ export const experience = [
     location: "Remote",
     period: "Oct 2024 – Present",
     type: "Freelance",
-    description: "Tutored students in Arduino and programming fundamentals, assisting in project development and troubleshooting.",  },
+    description: "Arduino and programming fundamentals, remote.",
+  },
   {
     title: "Website Coordinator",
     company: "Sustainable Kingston",
     location: "Hybrid",
     period: "Aug 2024 – Apr 2025",
     type: "Contract",
-    description: "Managed website content, design, and technical issues for Sustainable Kingston, handling analytics and community engagement.",  },
+    description: "Site content, design, analytics, and community engagement.",
+  },
 ];
 
 export const projects = [
   {
     name: "SLC Indoor Navigation",
     period: "Ongoing",
-    description: "Graph-based indoor navigation system for multi-floor college buildings, with AI-powered natural language processing.",
-    technologies: ["Flask", "React", "OpenAI GPT-4", "BFS", "Dijkstra's Algorithm", "Graph Algorithms", "Python"],
+    description: "Indoor nav for multi-floor campuses with graph search and NLP.",
+    technologies: ["Flask", "React", "OpenAI", "Python"],
     github: "https://github.com/sapkota-aayush",
     liveDemo: "https://slcnavigation.aayussh.com/",
     image: "", // No image preview
@@ -63,8 +65,8 @@ export const projects = [
   {
     name: "Vojur",
     period: "Ongoing",
-    description: "Voice-first journaling app using OpenAI Realtime API for natural conversations with an AI companion.",
-    technologies: ["Next.js", "OpenAI Realtime API", "Supabase", "mem0", "TypeScript"],
+    description: "Voice-first journaling with realtime AI conversation.",
+    technologies: ["Next.js", "OpenAI Realtime", "Supabase", "TypeScript"],
     github: "https://github.com/sapkota-aayush",
     liveDemo: "https://voice.aayussh.com/",
     image: "", // Add image path when available
@@ -76,11 +78,8 @@ export const projects = [
   {
     name: "Dumps.online",
     period: "2025",
-    description: [
-      "An anonymous platform built for St. Lawrence College students.",
-      "Used by 100+ students during launch.",
-      "Got banned due to college code violation.",
-    ],
+    description:
+      "Anonymous SLC student platform; 100+ users at launch; later shut down.",
     technologies: ["React", "TypeScript", "Node.js", "AWS", "Docker"],
     github: "https://github.com/sapkota-aayush",
     liveDemo: "https://dumps.online",
@@ -92,8 +91,8 @@ export const projects = [
   {
     name: "Folderly-Prototype",
     period: "2025",
-    description: "Console Python package for AI-powered file organization using natural language commands.",
-    technologies: ["Python", "OpenAI GPT-3", "Poetry", "Threading", "OS File Management"],
+    description: "CLI tool: natural-language file organization.",
+    technologies: ["Python", "OpenAI", "Poetry"],
     github: "https://github.com/sapkota-aayush/Folderly-Prototype",
     downloadLink: "https://github.com/sapkota-aayush/Folderly-Prototype",
     video: "", // Add video recording URL when available
@@ -105,7 +104,8 @@ export const projects = [
 export const openSource = [
   {
     name: "Numaflow",
-    description: "Open source contribution to Numaflow project. Key contributions include: Docker file optimization, gRPC server error handling, documentation bug fixes, Python SDK improvements.",
+    description:
+      "PRs: Docker, gRPC handling, docs, and Python SDK improvements.",
     technologies: ["Python SDK", "Go", "Rust", "Kubernetes", "Docker"],
     github: "https://github.com/sapkota-aayush/numaflow",
     type: "Open Source Contributions",
@@ -145,7 +145,7 @@ export const hackathons: HackathonItem[] = [
     name: "Pinpoint",
     hackathon: "QHACKS at Queen's University",
     period: "Feb 2026",
-    description: "Winner at QHacks for Pinpoint, a map-based housing platform, securing a pitch for $10,000.",
+    description: "Map-based housing; QHacks winner, $10K pitch.",
     technologies: [],
     image: "/original.png",
     projectLink: "https://usepinpoint.vercel.app",
@@ -155,10 +155,22 @@ export const hackathons: HackathonItem[] = [
     achievement: "🏆 Winner, QHacks (Secured pitch for $10,000)",
   },
   {
+    name: "Pinpoint",
+    hackathon: "Mayor's Innovation Challenge",
+    period: "2026",
+    description: "City pitch competition; our segment ~13:00 in the recording.",
+    technologies: [],
+    image: "/mic.jpeg",
+    projectLink: "",
+    devPostLink: "",
+    github: "",
+    video: "https://www.youtube.com/live/_fb5Xqjcm-U?si=RMwEq9-tGipTapWM&t=780",
+  },
+  {
     name: "Kingston 311 AI Assistant",
     hackathon: "King's Hack by The AI Collective Kingston (Mayor's Cup)",
     period: "Jan 2026",
-    description: "A prototype AI chat assistant for Kingston 311 information, with accessibility features and official source citations.",
+    description: "311 info chatbot with citations and accessibility.",
     technologies: ["LangChain", "mem0", "AI", "React", "TypeScript", "Accessibility"],
     image: "/city of kingston.webp",
     projectLink: "https://lnkd.in/eGeVAups",
@@ -169,7 +181,7 @@ export const hackathons: HackathonItem[] = [
     name: "McHacks X Backboard",
     hackathon: "McHacks",
     period: "2026",
-    description: "Voice-first journaling app (similar to Vojur) developed for McHacks.",
+    description: "Realtime voice journaling (Vojur-style) for McHacks.",
     technologies: ["Next.js", "OpenAI Realtime API", "Supabase", "mem0", "TypeScript"],
     image: "/vojurlogo.png",
     projectLink: "https://youtu.be/wQ7zC5duaws?si=eGpU1GCfERASJAPf",
@@ -181,7 +193,7 @@ export const hackathons: HackathonItem[] = [
     name: "Love Is Blind (RedFlagr)",
     hackathon: "Queen's Stupid Hackathon",
     period: "Nov 2025",
-    description: "A dating app that matches people based on their worst traits and red flags.",
+    description: "Dating app matching on worst traits / red flags.",
     technologies: ["FastAPI", "Next.js", "Python", "React", "Tailwind", "TypeScript"],
     image: "/LoveIsBlind.png",
     projectLink: "",
@@ -192,7 +204,7 @@ export const hackathons: HackathonItem[] = [
     name: "NGMI",
     hackathon: "Toronto Stupid Ideas Hackathon",
     period: "Oct 2025",
-    description: "An anti-productivity app that disrupts focus with popups, memes, and chaos.",
+    description: "Anti-productivity chaos: popups, memes, distraction.",
     technologies: ["Python", "Tkinter", "easygui", "AppleScript", "psutil", "AppKit"],
     image: "/NGMI.png",
     projectLink: "",
@@ -206,7 +218,7 @@ export const leadership = [
     organization: "HackSLC",
     role: "Team Lead & Organizer",
     period: "Nov 2025",
-    description: "Organized St. Lawrence College's first-ever student-led hackathon, managing event planning and securing sponsorship.",
+    description: "First student-led SLC hackathon — planning and sponsorships.",
     image: "/hackslc.jpeg",
     eventLink: "https://luma.com/j0itjwh2",
     devPostLink: "https://hackslc.devpost.com/",
@@ -216,20 +228,20 @@ export const leadership = [
     organization: "Toastmasters International",
     role: "Member",
     period: "Oct 2024",
-    description: "Joined Toastmasters International to develop public speaking and leadership skills.",
+    description: "Public speaking and leadership development.",
   },
   {
     organization: "Toastmasters International",
     role: "VP of Membership & Speaker",
     period: "Oct 2024 – Jul 2025",
-    description: "Managed member recruitment and retention, and developed speaking programs.",
+    description: "Membership, recruitment, and speaking programs.",
   },
   {
     organization: "Toastmasters International",
     role: "President",
     period: "Jul 2025 – Present",
-    description: "Led the local Toastmasters chapter, managing people, budgets, and events.",
-    achievement: "Came third at our Toastmasters area contest delivering international speech of 7 min.",
+    description:
+      "Chapter lead; 3rd at area contest (7 min international speech).",
   },
 ];
 

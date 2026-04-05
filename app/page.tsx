@@ -16,7 +16,7 @@ import { floatingLogos } from '@/lib/constants'
 
 export default function Home() {
   return (
-    <main className="min-h-screen py-4 md:py-8 relative pb-20 md:pb-8">
+    <main className="relative min-h-screen pb-12 pt-0 md:pb-16">
       <Navigation />
       {floatingLogos.length > 0 && <FloatingLogos logos={floatingLogos} />}
       <Hero />

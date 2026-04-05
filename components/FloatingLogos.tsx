@@ -52,7 +52,7 @@ export default function FloatingLogos({ logos }: FloatingLogosProps) {
               ease: "easeInOut",
             }}
           >
-            <div className="relative w-full h-full rounded-full bg-gradient-to-br from-brown-100 to-brown-200 shadow-2xl backdrop-blur-sm border-2 border-brown-400/60 p-2 hover:opacity-100 transition-opacity ring-2 ring-brown-300/40">
+            <div className="relative h-full w-full rounded-full border border-line/90 bg-tint/95 p-2 shadow-xl backdrop-blur-sm transition-opacity hover:opacity-100">
               <Image
                 src={logo.src}
                 alt={logo.alt}

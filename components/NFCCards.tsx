@@ -35,42 +35,35 @@ export default function NFCCards() {
   }
 
   return (
-    <section className="py-6 md:py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+    <section id="side-hustle" className="px-4 py-10 md:py-12">
+      <div className="mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-3 sm:gap-4 mb-4 flex-wrap">
-            <h2 className="text-2xl md:text-3xl font-bold text-brown-900">Side Hustle</h2>
-            <motion.div
-              className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex-shrink-0"
-              animate={{
-                y: [0, -10, 0],
-                rotate: [0, 5, -5, 0],
-                scale: [1, 1.05, 1],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-brown-100 to-brown-200 shadow-xl border-2 border-brown-400/60 p-2 ring-2 ring-brown-300/40">
+          <div className="mb-4 flex flex-wrap items-center gap-3 sm:gap-4">
+            <h2 className="flex items-start gap-2.5 text-lg font-semibold text-ink md:text-xl">
+              <span className="shrink-0 select-none" aria-hidden>
+                ◆
+              </span>
+              <span>Side hustle</span>
+            </h2>
+            <div className="relative h-10 w-10 shrink-0 sm:h-12 sm:w-12 md:h-14 md:w-14">
+              <div className="relative h-full w-full rounded-full border border-line/90 bg-tint p-2">
                 <Image
                   src="/nfclogo.webp"
                   alt="NFC Logo"
                   fill
-                  className="object-contain rounded-full"
+                  className="rounded-full object-contain"
                 />
               </div>
-            </motion.div>
+            </div>
           </div>
-          
-          <div className="bg-[#fefcf9] rounded-sm shadow-sm border border-brown-300/40 p-4 md:p-6">
-            <p className="text-brown-800 mb-4 text-sm md:text-base leading-relaxed">
+
+          <div className="card-surface p-4 md:p-6">
+            <p className="mb-4 text-sm leading-relaxed text-ink-muted md:text-base">
               I do sell these as well! Digital business cards that work like smart networking cards. Tap your phone to instantly share your contact information, portfolio, and social links.
             </p>
 
@@ -139,7 +132,7 @@ export default function NFCCards() {
                       }}
                       onClick={() => goToSlide(index)}
                     >
-                      <div className="relative w-full h-full rounded-lg overflow-hidden bg-brown-100 shadow-2xl">
+                      <div className="relative h-full w-full overflow-hidden rounded-lg bg-tint shadow-2xl">
                         <Image
                           src={image}
                           alt={`NFC Card ${index + 1}`}
@@ -155,7 +148,7 @@ export default function NFCCards() {
               {/* Navigation arrows */}
               <button
                 onClick={goToPrevious}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-white/80 hover:bg-white text-brown-900 rounded-full p-2 shadow-lg transition-all"
+                className="absolute left-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-elevated/90 p-2 text-ink shadow-lg backdrop-blur-sm transition-all hover:bg-elevated"
                 aria-label="Previous slide"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -164,7 +157,7 @@ export default function NFCCards() {
               </button>
               <button
                 onClick={goToNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-white/80 hover:bg-white text-brown-900 rounded-full p-2 shadow-lg transition-all"
+                className="absolute right-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-elevated/90 p-2 text-ink shadow-lg backdrop-blur-sm transition-all hover:bg-elevated"
                 aria-label="Next slide"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -181,8 +174,8 @@ export default function NFCCards() {
                   onClick={() => goToSlide(index)}
                   className={`w-2 h-2 rounded-full transition-all ${
                     index === currentIndex
-                      ? 'bg-brown-600 w-8'
-                      : 'bg-brown-300 hover:bg-brown-400'
+                      ? 'w-8 bg-blue-600 dark:bg-blue-500'
+                      : 'bg-line hover:bg-line/80'
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -190,22 +183,22 @@ export default function NFCCards() {
             </div>
 
             {/* Pricing and CTA */}
-            <div className="bg-brown-50 rounded-lg p-2 md:p-3 border border-brown-200">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div className="rounded-lg border border-line/80 bg-tint p-2 md:p-3">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex-1">
-                  <p className="text-xs md:text-sm font-semibold text-brown-900 mb-0.5">
-                    Custom NFC Cards - $15
+                  <p className="mb-0.5 text-xs font-semibold text-ink md:text-sm">
+                    Custom NFC cards — $15
                   </p>
-                  <p className="text-brown-700 text-xs">
+                  <p className="text-xs text-ink-muted">
                     Custom prints • Delivered within 1 day
                   </p>
-                  <p className="text-brown-600 text-xs mt-1 italic">
+                  <p className="mt-1 text-xs italic text-ink-subtle">
                     Contact if you want one. First impression is last impression.
                   </p>
                 </div>
                 <a
                   href={`mailto:${socialLinks.email}?subject=NFC Card Inquiry&body=Hi, I'm interested in ordering a custom NFC business card!`}
-                  className="inline-flex items-center justify-center px-3 py-1.5 bg-brown-600 text-white rounded-lg hover:bg-brown-700 transition-colors text-xs font-medium shadow-sm hover:shadow whitespace-nowrap flex-shrink-0"
+                  className="inline-flex shrink-0 items-center justify-center rounded-lg bg-ink px-3 py-1.5 text-xs font-medium text-elevated shadow-sm transition hover:opacity-90 dark:bg-blue-600 dark:hover:bg-blue-500"
                 >
                   <svg className="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
