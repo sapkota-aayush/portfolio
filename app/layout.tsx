@@ -1,52 +1,78 @@
-import type { Metadata } from 'next'
-import Script from 'next/script'
-import './globals.css'
-import CustomCursor from '@/components/CustomCursor'
-import { ThemeProvider } from '@/components/ThemeProvider'
-import { inter, caveat } from '@/lib/fonts'
+import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import "./globals.css";
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
+const TITLE = "Aayush Sapkota — Journal";
+const DESCRIPTION =
+  "Aayush Sapkota's portfolio, rendered as a spiral-bound journal. Ask anything.";
 
 export const metadata: Metadata = {
-  title: 'Aayush Sapkota - Software Developer • Toastmaster Public Speaker',
-  description:
-    'Portfolio of Aayush Sapkota - Software Developer & Toastmaster Public Speaker',
-}
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  applicationName: "Aayush Sapkota — Journal",
+  authors: [{ name: "Aayush Sapkota" }],
+  creator: "Aayush Sapkota",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: "Aayush Sapkota — Journal",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    creator: "@AayuSapkota",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
 
-const themeInit = `
-(function () {
-  try {
-    var k = 'portfolio-theme';
-    var t = localStorage.getItem(k);
-    if (t === 'dark' || t === 'light') {
-      document.documentElement.classList.toggle('dark', t === 'dark');
-      return;
-    }
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add('dark');
-    }
-  } catch (e) {}
-})();
-`
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "rgb(250 247 240)" },
+    { media: "(prefers-color-scheme: dark)", color: "rgb(250 247 240)" },
+  ],
+  colorScheme: "light",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${caveat.variable} font-sans min-h-screen`}
-      >
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: themeInit }}
-        />
-        <ThemeProvider>
-          <CustomCursor />
-          {children}
-        </ThemeProvider>
+    <html lang="en">
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
-  )
+  );
 }

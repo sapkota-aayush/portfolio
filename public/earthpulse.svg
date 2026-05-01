@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="EarthPulse globe">
+  <defs>
+    <radialGradient id="ocean" cx="36%" cy="28%" r="72%">
+      <stop offset="0%" stop-color="#7dd3fc"/>
+      <stop offset="52%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <circle cx="80" cy="80" r="62" fill="url(#ocean)" filter="url(#shadow)"/>
+  <path d="M38 57c14-17 31-24 47-19 10 3 6 14-3 16-7 2-7 8 0 11 11 4 11 15 0 20-10 5-15-5-23-1-9 4-9 18-20 15-13-4-15-28-1-42Z" fill="#22c55e" opacity=".9"/>
+  <path d="M94 44c19 3 35 18 41 38-13-2-19 5-26 10-8 6-19 5-22-3-3-9 10-13 12-22 2-8-8-11-5-23Z" fill="#86efac" opacity=".85"/>
+  <path d="M99 108c12-8 25-8 34 2-10 18-31 30-54 31 3-15 10-26 20-33Z" fill="#16a34a" opacity=".9"/>
+  <path d="M31 91c17 8 34 12 51 11 23-1 42-8 57-20" fill="none" stroke="#bae6fd" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+  <path d="M48 38c-13 22-14 55-2 84M112 38c13 22 14 55 2 84M19 80h122" fill="none" stroke="#dbeafe" stroke-width="2" stroke-linecap="round" opacity=".32"/>
+  <circle cx="118" cy="47" r="7" fill="#ef4444"/>
+  <circle cx="118" cy="47" r="13" fill="none" stroke="#fecaca" stroke-width="3" opacity=".7"/>
+</svg>
