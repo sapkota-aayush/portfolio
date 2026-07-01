@@ -42,12 +42,28 @@ const EXPERIENCE_GROUPS: ExperienceGroup[] = [
     roles: [
       {
         company: "Empire Life",
-        title: "Software Development Intern (Co-op)",
-        dates: "Aug 2025 – Present",
+        title: "Software Engineer",
+        dates: "Jun 2026 – Present",
         location: "Kingston / Hybrid",
         logoSrc: "/empirelife.png",
         companyUrl: "https://www.empire.ca/",
         logoRotation: -4,
+        blurb: (
+          <>
+            Full-time on the Front Office Development team, building and
+            shipping enterprise software after converting from co-op.
+          </>
+        ),
+      },
+      {
+        company: "Empire Life",
+        title: "Software Development Intern (Co-op)",
+        dates: "Aug 2025 – Jun 2026",
+        location: "Kingston / Hybrid",
+        logoSrc: "/empirelife.png",
+        companyUrl: "https://www.empire.ca/",
+        logoRotation: 2,
+        stickerBg: "var(--color-paper-warm)",
         blurb: (
           <>
             Pipelines, containers, and cloud migration work inside a real
@@ -65,9 +81,9 @@ const EXPERIENCE_GROUPS: ExperienceGroup[] = [
         logoRotation: 3,
         blurb: (
           <>
-            Building a student housing startup from QHacks into Kingston
-            Economic Development&apos;s Summer Company program, with up to
-            $3K funding.
+            Building a student housing startup from QHacks through
+            Kingston Economic Development&apos;s Summer Company program,
+            with up to $3K in funding.
           </>
         ),
       },

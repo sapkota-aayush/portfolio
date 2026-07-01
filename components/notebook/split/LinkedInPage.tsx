@@ -35,7 +35,7 @@ const POSTS: Post[] = [
   {
     url: "https://www.usepinpoint.ca/",
     heroSrc: "/kingstondevprogram.png",
-    caption: "Pinpoint accepted into Summer Company",
+    caption: "Pinpoint in Summer Company",
     rotation: 4,
   },
   {

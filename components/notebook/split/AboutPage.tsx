@@ -15,8 +15,8 @@ import { Sticker } from "../primitives/Sticker";
 
 const BODY_PARAGRAPHS = [
   "Software developer, AI builder, and Toastmasters speaker based in Kingston, Canada. My motto is simple: building, speaking, sharing.",
-  "Current arc:\n→ building software people can use\n→ speaking so ideas land clearly\n→ sharing the journey as it grows\nI'm happiest when a messy idea becomes something people can actually click, use, or pitch.",
-  "Recently: three Student Association awards, Pinpoint getting into Kingston Economic Development's Summer Company program, QHacks / Mayor's Innovation Challenge pitches, and way too many side quests. This site is one more side quest, but at least it flips pages.",
+  "Current arc:\n→ full-time software engineer at Empire Life (Front Office Development)\n→ building Pinpoint through Kingston Economic Development's Summer Company program\n→ speaking so ideas land clearly\nI'm happiest when a messy idea becomes something people can actually click, use, or pitch.",
+  "Recently: graduated from St. Lawrence College, converted my Empire Life co-op into a full-time role, got Pinpoint into Summer Company, picked up three Student Association awards, and kept way too many side quests running. This site is one more side quest, but at least it flips pages.",
 ];
 
 // Photos + slot positions split into two lists so the site can randomly
@@ -122,7 +122,7 @@ const MARGIN_NOTES: Array<{
   delayMs: number;
 }> = [
   {
-    text: "currently:\nbuilding Pinpoint",
+    text: "currently:\nEmpire Life +\nPinpoint",
     top: "calc(var(--line) * 7)",
     left: "3.5%",
     rotate: -7,

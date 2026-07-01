@@ -22,7 +22,7 @@ const PROJECTS: Project[] = [
     logoSrc: "/pinpoint.svg",
     href: "https://www.usepinpoint.ca/",
     blurb:
-      "Started at QHacks, grew through realtor conversations and the Mayor's Innovation Challenge, now accepted into Summer Company with up to $3K funding.",
+      "Started at QHacks, grew through realtor conversations and the Mayor's Innovation Challenge, now in Kingston Economic Development's Summer Company program with up to $3K funding.",
   },
   {
     name: "Vojur",

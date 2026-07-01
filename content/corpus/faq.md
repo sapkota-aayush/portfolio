@@ -2,7 +2,7 @@
 
 ## who are you?
 
-Software developer, AI builder, St. Lawrence College student, and Toastmasters speaker. Full version is /about.
+Software developer, AI builder, St. Lawrence College graduate, and Toastmasters speaker. Full version is /about.
 
 ## where are you based?
 
@@ -10,7 +10,7 @@ Kingston, Ontario, Canada.
 
 ## where do you work?
 
-Empire Life as a Software Development Intern, plus peer tutoring. Timeline is at /experience.
+Empire Life as a full-time Software Engineer on the Front Office Development team, plus Pinpoint and peer tutoring. Timeline is at /experience.
 
 ## what have you built?
 

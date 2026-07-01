@@ -12,11 +12,12 @@ import { PageChrome } from "./chrome/PageChrome";
 import { SpiralBinding } from "./chrome/SpiralBinding";
 import { CLOSE_JOURNAL_EVENT } from "./chrome/CoverBackButton";
 import { PageFlipTransition } from "./PageFlipTransition";
-import { PAGE_ORDER, type PageKey } from "./pageOrder";
+import { PAGE_ORDER, isPageKey, nextPage, prevPage, type PageKey } from "./pageOrder";
 import { LandingPage } from "./landing/LandingPage";
 import type { ChatMessage } from "./chat/ChatPage";
 import { HomePage } from "./home/HomePage";
 import { ContentPage } from "./content/ContentPage";
+import { PageFlipRail } from "./chrome/PageFlipRail";
 
 const WELCOME_BUBBLES = [
   "You've opened Aayush's journal. I'm AayushBot — handling the easy questions while he builds.",
@@ -72,23 +73,14 @@ const CHAR_DURATION_MS = 180;
 const SEED_GAP_MS = 300;
 
 function kindToPageKey(kind: StageView["kind"]): PageKey {
-  return kind === "empty" ? "home" : (kind as PageKey);
+  if (kind === "empty") return "home";
+  if (isPageKey(kind)) return kind;
+  return "home";
 }
 
-// Z-index stack: home on top (closest to cover), contact at the bottom.
-// The stack order matches the journal metaphor — each forward nav flips
-// the currently-visible page away to reveal the next one.
-const Z_FOR_KIND: Record<PageKey, number> = {
-  home: 9,
-  about: 8,
-  experience: 7,
-  education: 6,
-  projects: 5,
-  hackathons: 4,
-  leadership: 3,
-  linkedin: 2,
-  contact: 1,
-};
+function pageKeyToViewKind(kind: PageKey): StageView["kind"] {
+  return kind === "home" ? "empty" : kind;
+}
 
 export function NotebookShell({
   initialView,
@@ -178,8 +170,9 @@ export function NotebookShell({
   const [sessionKeys, setSessionKeys] = useState<Record<string, number>>({
     [initialKind]: 0,
   });
-
-  // /home fresh entry: seeds animate in from mount.
+  const currentKindRef = useRef(currentKind);
+  currentKindRef.current = currentKind;
+  const flipRailActiveRef = useRef(false);
   useEffect(() => {
     if (!chatOnly) return;
     let cumulative = 80;
@@ -209,11 +202,22 @@ export function NotebookShell({
       return;
     }
     if (showLanding) return;
+    if (!isPageKey(currentKind)) return;
     const targetPath = currentKind === "home" ? "/home" : `/${currentKind}`;
     if (window.location.pathname !== targetPath) {
       window.history.pushState({}, "", targetPath);
     }
   }, [currentKind, showLanding]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const path = window.location.pathname;
+    if (path === "/undefined" || path.endsWith("/undefined")) {
+      window.history.replaceState({}, "", "/home");
+      setCurrentKind("home");
+      setView({ kind: "empty" });
+    }
+  }, [setView]);
 
   useEffect(() => {
     const onPopState = () => {
@@ -345,11 +349,41 @@ export function NotebookShell({
     return () => window.clearTimeout(id);
   }, [coverClosing, setMessages, setView]);
 
-  // Landing-advance triggers: unchanged.
+  const handleSequentialForward = useCallback(() => {
+    const targetKind = nextPage(currentKindRef.current);
+    if (
+      !isPageKey(targetKind) ||
+      pendingKind !== null ||
+      showLanding ||
+      !chatMounted
+    ) {
+      return;
+    }
+    setView({ kind: pageKeyToViewKind(targetKind) });
+  }, [chatMounted, pendingKind, setView, showLanding]);
+
+  const handleSequentialBackward = useCallback(() => {
+    const targetKind = prevPage(currentKindRef.current);
+    if (
+      !isPageKey(targetKind) ||
+      pendingKind !== null ||
+      showLanding ||
+      !chatMounted
+    ) {
+      return;
+    }
+    setView({ kind: pageKeyToViewKind(targetKind) });
+  }, [chatMounted, pendingKind, setView, showLanding]);
+
+  // Landing cover: wheel / swipe / keys open the journal.
+  // Inside the journal: only intentional flips — corner peel, arrow keys,
+  // or a horizontal swipe that starts on the screen edge. Normal scroll
+  // never changes pages.
   useEffect(() => {
     const WHEEL_THRESHOLD = 30;
-    const TOUCH_THRESHOLD = 50;
-    const ADVANCE_KEYS = new Set([
+    const TOUCH_THRESHOLD = 56;
+    const EDGE_FRACTION = 0.14;
+    const LANDING_KEYS = new Set([
       "ArrowDown",
       "ArrowUp",
       "ArrowRight",
@@ -381,25 +415,58 @@ export function NotebookShell({
         setView({ kind: "empty" });
         return;
       }
-      if (showLanding && !coverFlipping && ADVANCE_KEYS.has(e.key)) {
+      if (showLanding && !coverFlipping && LANDING_KEYS.has(e.key)) {
         e.preventDefault();
         advance();
+        return;
+      }
+      if (!showLanding && !coverFlipping && chatMounted && pendingKind === null) {
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          handleSequentialBackward();
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          handleSequentialForward();
+        }
       }
     };
 
     let touchStartX = 0;
     let touchStartY = 0;
+    let touchStartedOnLeftEdge = false;
+
     const onTouchStart = (e: TouchEvent) => {
+      if (flipRailActiveRef.current) return;
       const t = e.touches[0];
-      touchStartX = t?.clientX ?? 0;
-      touchStartY = t?.clientY ?? 0;
+      if (!t) return;
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      const edge = window.innerWidth * EDGE_FRACTION;
+      touchStartedOnLeftEdge = t.clientX <= edge;
     };
+
     const onTouchEnd = (e: TouchEvent) => {
-      if (!showLanding || coverFlipping) return;
+      if (coverFlipping || flipRailActiveRef.current) return;
       const t = e.changedTouches[0];
-      const dx = (t?.clientX ?? 0) - touchStartX;
-      const dy = (t?.clientY ?? 0) - touchStartY;
-      if (Math.hypot(dx, dy) > TOUCH_THRESHOLD) advance();
+      if (!t) return;
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+
+      if (showLanding) {
+        if (Math.hypot(dx, dy) >= TOUCH_THRESHOLD) advance();
+        return;
+      }
+
+      if (!chatMounted || pendingKind !== null) return;
+      if (Math.abs(dx) < TOUCH_THRESHOLD) return;
+      if (Math.abs(dx) < Math.abs(dy) * 1.35) return;
+
+      // Backward only — forward is handled by the flip rail on the right edge.
+      if (touchStartedOnLeftEdge && dx > TOUCH_THRESHOLD) {
+        handleSequentialBackward();
+      }
+
+      touchStartedOnLeftEdge = false;
     };
 
     window.addEventListener("wheel", onWheel, { passive: true });
@@ -412,7 +479,17 @@ export function NotebookShell({
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchend", onTouchEnd);
     };
-  }, [advance, coverFlipping, currentKind, setView, showLanding]);
+  }, [
+    advance,
+    chatMounted,
+    coverFlipping,
+    currentKind,
+    handleSequentialBackward,
+    handleSequentialForward,
+    pendingKind,
+    setView,
+    showLanding,
+  ]);
 
   const closeContentPage = useCallback(() => {
     setView({ kind: "empty" });
@@ -437,6 +514,7 @@ export function NotebookShell({
     if (showLanding) return;
     if (pendingKind !== null) return;
     const targetKind = kindToPageKey(view.kind);
+    if (!isPageKey(targetKind)) return;
     if (targetKind === currentKind) return;
 
     // Route bootstrap guard. The store is synced in an effect, so the
@@ -551,7 +629,12 @@ export function NotebookShell({
   // transitionend on the flipping page — commits the new currentKind and
   // marks the destination as ready so its reveal animations can play.
   const commitFlipEnd = useCallback(() => {
-    if (pendingKind === null) return;
+    if (pendingKind == null || !isPageKey(pendingKind)) {
+      setPendingKind(null);
+      setFlippingKind(null);
+      setFlipTransition(null);
+      return;
+    }
     const dest = pendingKind;
     setCurrentKind(dest);
     setPendingKind(null);
@@ -561,6 +644,16 @@ export function NotebookShell({
       if (prev.has(dest)) return prev;
       const next = new Set(prev);
       next.add(dest);
+      return next;
+    });
+    // Keep only the committed page face-on; everything else stays flipped
+    // away so stale 0° pages can't block interaction or cover the stack.
+    setRotations((prev) => {
+      const next: Record<string, number> = {};
+      for (const kind of Object.keys(prev)) {
+        next[kind] = kind === dest ? 0 : -180;
+      }
+      next[dest] = 0;
       return next;
     });
     // Session counter is bumped at flip-start (in the view-change
@@ -587,7 +680,10 @@ export function NotebookShell({
   // a real transitionend.
   useEffect(() => {
     if (pendingKind === null) return;
-    const id = window.setTimeout(commitFlipEnd, FLIP_OPENING_MS + 200);
+    const id = window.setTimeout(
+      commitFlipEnd,
+      Math.max(FLIP_OPENING_MS, FLIP_CLOSING_MS) + 200,
+    );
     return () => window.clearTimeout(id);
   }, [pendingKind, commitFlipEnd]);
 
@@ -749,32 +845,36 @@ export function NotebookShell({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            style={{ position: "absolute", inset: 0, zIndex: 10 }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 10,
+              transformStyle: "preserve-3d",
+            }}
           >
             {PAGE_ORDER.filter((kind) => mountedKinds.has(kind)).map((kind) => {
               const rotation = rotations[kind] ?? 0;
               const isFlipping = flippingKind === kind;
+              const isCurrent = kind === currentKind;
               // Animate ONLY the currently-visible page with no flip
               // in progress. This toggles true/false as the user navigates
               // away and back, which — combined with the per-page
               // sessionKey — makes reveal animations replay on every
               // revisit.
               const animate =
-                kind === currentKind &&
+                isCurrent &&
                 pendingKind === null &&
                 readyKinds.has(kind);
-              // Flipping page gets a high z-index during the animation
-              // so it sits on top regardless of canonical stack order.
-              // Opening flip: source needs to be on top (so it covers
-              //   destination at 0° before flipping away). Without the
-              //   bump, a content-to-content nav where destination has
-              //   higher canonical z (e.g., /contact → /about) would
-              //   have destination covering source at flip start.
-              // Closing flip: destination (home) needs to be on top as
-              //   it rotates in and lands covering source. Home's
-              //   canonical z=5 is already highest, but the bump is
-              //   harmless here.
-              const zIndex = isFlipping ? 50 : Z_FOR_KIND[kind];
+              // Only the flipping page (during animation) or the committed
+              // current page should receive pointer events. Flipped-away
+              // pages — especially home at canonical z=9 — otherwise sit on
+              // top of the stack and block every click/tap after the first
+              // navigation.
+              const pointerEvents =
+                isFlipping || (isCurrent && pendingKind === null)
+                  ? "auto"
+                  : "none";
+              const zIndex = isFlipping ? 50 : isCurrent ? 20 : 1;
               return (
                 <div
                   key={kind}
@@ -788,6 +888,8 @@ export function NotebookShell({
                     transition: isFlipping && flipTransition ? flipTransition : "none",
                     backfaceVisibility: "hidden",
                     WebkitBackfaceVisibility: "hidden",
+                    transformStyle: "preserve-3d",
+                    pointerEvents,
                     willChange: isFlipping ? "transform" : undefined,
                   }}
                 >
@@ -814,6 +916,22 @@ export function NotebookShell({
       )}
 
       <SpiralBinding />
+
+      {!showLanding && chatMounted && pendingKind === null && (
+        <PageFlipRail
+          canGoForward={nextPage(currentKind) !== null}
+          onFlip={handleSequentialForward}
+          onFlipActiveChange={(active) => {
+            if (active) {
+              flipRailActiveRef.current = true;
+              return;
+            }
+            window.setTimeout(() => {
+              flipRailActiveRef.current = false;
+            }, 350);
+          }}
+        />
+      )}
     </div>
   );
 }

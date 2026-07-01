@@ -6,8 +6,7 @@ These are the only facts you can claim about Aayush. If something is not here, d
 
 - Full name: **Aayush Sapkota**.
 - Based in **Kingston, Ontario, Canada**.
-- Studying **Computer Programming and Analysis** at **St. Lawrence College**.
-- Expected completion: **Apr 2026**.
+- **Graduated** from **St. Lawrence College** with an Advanced Diploma in **Computer Programming and Analysis** (Apr 2026).
 - Public email: **aayush@aayussh.com**.
 - LinkedIn: **https://www.linkedin.com/in/aayush-sapkota/**.
 - GitHub: **https://github.com/sapkota-aayush**.
@@ -19,15 +18,18 @@ Aayush is a software developer, AI builder, and Toastmasters public speaker. His
 
 Default one-liner:
 
-> "Building, speaking, sharing. I'm a software developer and AI builder at St. Lawrence College, currently doing software development work at Empire Life and building side projects around voice AI, campus navigation, and hackathon ideas."
+> "Building, speaking, sharing. I'm a software engineer at Empire Life on the Front Office Development team, building Pinpoint through Summer Company, and still shipping side projects around voice AI and hackathon ideas."
 
 ## Current work
 
-- **Software Development Intern (Co-op), Empire Life** — Aug 2025 to present. Pipelines, containers, and cloud migration.
+- **Software Engineer, Empire Life** — Jun 2026 to present. Full-time on the Front Office Development team, converted from co-op.
+- **Software Development Intern (Co-op), Empire Life** — Aug 2025 to Jun 2026. Pipelines, containers, and cloud migration.
+- **Founder, Pinpoint** — 2026 to present. Student housing startup in Kingston Economic Development Corporation's Summer Company program with up to **$3,000 in funding**.
 - **Peer Tutor, Self-Employed** — Oct 2024 to present. Arduino and programming fundamentals, remote.
 - **Toastmasters International** — public speaking and leadership. Roles include member, VP Membership, and President.
 - **Mayor's Innovation Challenge** — pitched Pinpoint as a Kingston student housing platform.
 - **Student Association Awards Night, April 2026** — received three awards at St. Lawrence College: Innovation & Initiative Award, Student Association Award, and High-Impact Event Award.
+- **St. Lawrence College feature, June 2026** — second time featured on the college website in a spotlight titled *From Classroom to Startup: A Journey of Innovation and Leadership*. URL: https://www.stlawrencecollege.ca/blog/-from-classroom-to-startup-a-journey-of-innovation-and-leadership
 
 ## What he builds
 
@@ -35,7 +37,7 @@ Default one-liner:
 - **SLC Indoor Navigation** — multi-floor campus navigation with graph search and NLP. Stack: Flask, React, OpenAI, Python.
 - **Dumps.online** — anonymous SLC student platform that reached 100+ users at launch, later shut down.
 - **Folderly-Prototype** — CLI tool for natural-language file organization. Stack: Python, OpenAI, Poetry.
-- **Pinpoint** — map-based housing project. QHacks winner, Mayor's Innovation Challenge pitch, and accepted into Kingston Economic Development Corporation's Summer Company program with up to $3,000 in funding.
+- **Pinpoint** — map-based housing project. QHacks winner, Mayor's Innovation Challenge pitch, and in Kingston Economic Development Corporation's Summer Company program with up to $3,000 in funding.
 - **Numaflow** — open-source contributions across Docker, gRPC handling, docs, and Python SDK improvements.
 - **NFC Smart Cards** — side hustle selling custom tap-to-share digital business cards.
 

@@ -9,7 +9,7 @@ Public contact policy:
 
 ## Good reasons to reach out
 
-- Software development internships or new-grad style opportunities.
+- Software engineering roles, AI product work, or interesting collaborations.
 - AI product, web app, or automation projects.
 - Hackathon collaborations.
 - Open-source work.

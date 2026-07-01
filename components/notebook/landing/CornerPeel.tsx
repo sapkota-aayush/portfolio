@@ -42,13 +42,13 @@ export function CornerPeel({
       aria-label="Flip to next page"
       title="flip to next page  ·  →"
       style={{
-        position: "absolute",
+        position: "fixed",
         right: 0,
         bottom: 0,
         width: size + 32,
         height: size + 32,
         cursor: "pointer",
-        zIndex: 30,
+        zIndex: 110,
         transition:
           "width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)",
       }}

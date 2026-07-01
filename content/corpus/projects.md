@@ -62,8 +62,7 @@ Map-based housing project.
 
 - QHacks winner.
 - Secured a $10K pitch opportunity.
-- Accepted into Kingston Economic Development Corporation's Summer Company program with up to $3,000 in funding.
-- Started from student housing pain points, then grew through realtor conversations, CFRC Radio, and the Mayor's Innovation Challenge.
+- In Kingston Economic Development Corporation's Summer Company program with up to $3,000 in funding.
 - URL: https://www.usepinpoint.ca/
 
 ## Other hackathon projects

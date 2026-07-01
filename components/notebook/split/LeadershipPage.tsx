@@ -26,6 +26,14 @@ const roleLineStyle = {
 
 const ITEMS: LeadershipItem[] = [
   {
+    title: "From Classroom to Startup",
+    meta: "second SLC college feature · Jun 2026",
+    imageSrc: "/slc.webp",
+    href: "https://www.stlawrencecollege.ca/blog/-from-classroom-to-startup-a-journey-of-innovation-and-leadership",
+    blurb:
+      "Featured again on the St. Lawrence College website — this time on innovation, Toastmasters leadership, HackSLC, Empire Life, and building Pinpoint through Summer Company.",
+  },
+  {
     title: "2026 Student Association Awards",
     meta: "three awards · Apr 2026",
     imageSrc: "/Anotthermain.jpeg",

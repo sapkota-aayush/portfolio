@@ -53,7 +53,7 @@ const TOPIC_PATTERNS: Record<ToolName, RegExp> = {
   showHackathons:
     /\b(hackathons?|qhacks?|king'?s\s+hack|mchacks?|stupid\s+hackathon|ngmi|redflagr|love\s+is\s+blind)\b/i,
   showLeadership:
-    /\b(leadership|awards?|toastmasters|student\s+association|high-impact|initiative|organizing|speaker|speaking|hackslc)\b/i,
+    /\b(leadership|awards?|toastmasters|student\s+association|high-impact|initiative|organizing|speaker|speaking|hackslc|college\s+feature|classroom\s+to\s+startup|slc\s+spotlight)\b/i,
   showContact:
     /\b(contact|email|reach(\s+out|\s+him|\s+aayush)?|get\s+in\s+touch|dm|message\s+(him|aayush)|how\s+to\s+reach)\b/i,
   showLinkedIn:

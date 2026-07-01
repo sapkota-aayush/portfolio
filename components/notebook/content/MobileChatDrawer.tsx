@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChatPage, type ChatMessage } from "../chat/ChatPage";
 import { Paper } from "../chrome/Paper";
@@ -8,23 +9,13 @@ import { Paper } from "../chrome/Paper";
 const SHEET_HEIGHT_VH = 85;
 
 /**
- * Mobile-only chat drawer. Floating chat button pinned to the bottom-right;
+ * Mobile-only chat drawer. Floating chat button pinned to the bottom-left;
  * tapping opens a bottom-sheet that slides up and contains the same
  * `<ChatPage compact>` the desktop sidebar uses. Backdrop tap or
  * downward swipe closes the sheet.
  *
- * Reuses `<ChatPage>` directly — every chat behavior (intent matching,
- * message reveals, writing indicator, input) stays identical to desktop.
- *
- * `viewKind` is passed in (rather than read from the zustand store
- * directly) so this component doesn't subscribe to store updates that
- * happen mid-render in NotebookShell's first-paint store sync —
- * subscribing here would cause "Cannot update component while rendering"
- * warnings on every mount.
- *
- * Auto-closes when viewKind changes (navigation triggered from inside
- * the drawer). Without this, the drawer keeps covering the newly-
- * flipped-in page.
+ * The FAB and drawer are portaled to `document.body` so they aren't
+ * trapped under transformed page layers from the notebook flip stack.
  */
 export function MobileChatDrawer({
   messages,
@@ -38,6 +29,11 @@ export function MobileChatDrawer({
   viewKind: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -45,14 +41,8 @@ export function MobileChatDrawer({
 
   const close = () => setOpen(false);
 
-  return (
+  const overlay = (
     <>
-      {/* Floating chat button — sits above the page chrome and stays put
-          while the underlying page scrolls. Hidden when the drawer is
-          open since the sheet itself + backdrop are how you dismiss.
-          Pinned to the LEFT (clear of the spiral-binding rail) so it
-          mirrors the desktop layout where the chat lives on the left
-          side, and stays clear of the bottom-right page-number corner. */}
       {!open && (
         <button
           type="button"
@@ -60,16 +50,15 @@ export function MobileChatDrawer({
           aria-label="Open chat"
           style={{
             position: "fixed",
-            // 44px clears the 36px spiral binding with an 8px gap so the
-            // button doesn't visually overlap the coils.
-            left: 44,
+            left: "max(12px, env(safe-area-inset-left, 0px))",
             bottom: "calc(16px + env(safe-area-inset-bottom, 0px))",
-            zIndex: 70,
-            width: 56,
-            height: 56,
+            zIndex: 120,
+            width: 60,
+            height: 60,
             borderRadius: "50%",
             background: "var(--color-paper-warm)",
-            border: "1px solid color-mix(in srgb, var(--color-rule-navy) 25%, transparent)",
+            border:
+              "1px solid color-mix(in srgb, var(--color-rule-navy) 25%, transparent)",
             boxShadow: "0 6px 18px rgba(0,0,0,0.18)",
             display: "flex",
             alignItems: "center",
@@ -86,7 +75,6 @@ export function MobileChatDrawer({
             aria-hidden
             style={{ display: "block" }}
           >
-            {/* Speech-bubble glyph in handwritten ink color */}
             <path
               d="M 4 6 Q 4 4 6 4 L 20 4 Q 22 4 22 6 L 22 16 Q 22 18 20 18 L 11 18 L 7 22 L 7 18 L 6 18 Q 4 18 4 16 Z"
               fill="none"
@@ -104,7 +92,6 @@ export function MobileChatDrawer({
       <AnimatePresence>
         {open && (
           <>
-            {/* Backdrop — tap to dismiss */}
             <motion.div
               key="chat-drawer-backdrop"
               initial={{ opacity: 0 }}
@@ -116,12 +103,10 @@ export function MobileChatDrawer({
                 position: "fixed",
                 inset: 0,
                 background: "rgba(0,0,0,0.32)",
-                zIndex: 80,
+                zIndex: 130,
               }}
             />
 
-            {/* Sheet — slides up from the bottom edge. drag="y" with a
-                downward velocity / offset threshold dismisses on swipe. */}
             <motion.div
               key="chat-drawer-sheet"
               initial={{ y: "100%" }}
@@ -140,7 +125,7 @@ export function MobileChatDrawer({
                 right: 0,
                 bottom: 0,
                 height: `${SHEET_HEIGHT_VH}vh`,
-                zIndex: 90,
+                zIndex: 140,
                 background: "var(--color-paper)",
                 borderTopLeftRadius: 18,
                 borderTopRightRadius: 18,
@@ -151,7 +136,6 @@ export function MobileChatDrawer({
                 touchAction: "pan-y",
               }}
             >
-              {/* Drag handle pill */}
               <div
                 style={{
                   display: "flex",
@@ -166,12 +150,12 @@ export function MobileChatDrawer({
                     width: 44,
                     height: 5,
                     borderRadius: 3,
-                    background: "color-mix(in srgb, var(--color-ink-soft) 28%, transparent)",
+                    background:
+                      "color-mix(in srgb, var(--color-ink-soft) 28%, transparent)",
                   }}
                 />
               </div>
 
-              {/* Chat surface */}
               <div style={{ flex: 1, position: "relative", minHeight: 0 }}>
                 <Paper ruled={false} marginRule={false} />
                 <ChatPage
@@ -188,4 +172,7 @@ export function MobileChatDrawer({
       </AnimatePresence>
     </>
   );
+
+  if (!mounted || typeof document === "undefined") return null;
+  return createPortal(overlay, document.body);
 }

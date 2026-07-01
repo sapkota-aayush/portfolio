@@ -3,7 +3,7 @@ export const profile = {
   shortName: "Aayush",
   headline: "Building, speaking, sharing.",
   intro:
-    "Computer Programming and Analysis student at St. Lawrence College in Kingston, building AI tools, web apps, and community projects.",
+    "Computer Programming and Analysis graduate from St. Lawrence College in Kingston, full-time software engineer at Empire Life, and founder of Pinpoint.",
   email: "aayush@aayussh.com",
   linkedin: "https://www.linkedin.com/in/aayush-sapkota/",
   github: "https://github.com/sapkota-aayush",
@@ -33,13 +33,24 @@ export type ExperienceEntry = {
 export const experience: ExperienceEntry[] = [
   {
     company: "Empire Life",
-    role: "Software Development Intern (Co-op)",
-    period: "Aug 2025 – Present",
+    role: "Software Engineer",
+    period: "Jun 2026 – Present",
     logo: "/empirelife.png",
     logoAlt: "Empire Life logo",
     highlights: [
-      "Working across pipelines, containers, and cloud migration work.",
-      "Bringing a practical developer mindset to enterprise software systems.",
+      "Full-time on the Front Office Development team.",
+      "Converted from co-op after graduating from St. Lawrence College.",
+    ],
+  },
+  {
+    company: "Empire Life",
+    role: "Software Development Intern (Co-op)",
+    period: "Aug 2025 – Jun 2026",
+    logo: "/empirelife.png",
+    logoAlt: "Empire Life logo",
+    highlights: [
+      "Worked across pipelines, containers, and cloud migration.",
+      "Brought a practical developer mindset to enterprise software systems.",
     ],
   },
   {
@@ -50,7 +61,7 @@ export const experience: ExperienceEntry[] = [
     logoAlt: "Pinpoint logo",
     highlights: [
       "Building a student housing startup from a QHacks idea.",
-      "Accepted into Kingston Economic Development's Summer Company program with up to $3,000 in funding.",
+      "In Kingston Economic Development's Summer Company program with up to $3,000 in funding.",
     ],
   },
   {
@@ -93,14 +104,19 @@ export const education = {
   location: "Kingston, ON",
   program: "Computer Programming and Analysis",
   period: "Sep 2023 – Apr 2026",
-  credential: "Advanced Diploma",
+  credential: "Advanced Diploma · Graduated Apr 2026",
 };
 
 export const currentFocus = [
   {
     title: "Pinpoint",
     description:
-      "Student housing startup accepted into Kingston Economic Development's Summer Company program with up to $3,000 in funding.",
+      "Student housing startup in Kingston Economic Development's Summer Company program with up to $3,000 in funding.",
+  },
+  {
+    title: "SLC College Feature",
+    description:
+      "Featured for the second time on the St. Lawrence College website in June 2026 — From Classroom to Startup: A Journey of Innovation and Leadership.",
   },
   {
     title: "2026 Awards Night",

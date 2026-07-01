@@ -26,7 +26,7 @@ export const linkedinPosts: LinkedInPost[] = [
   },
   {
     id: "pinpoint-summer-company",
-    hook: "Pinpoint was accepted into Kingston Economic Development's Summer Company program.",
+    hook: "Pinpoint is in Kingston Economic Development's Summer Company program.",
     body: `Up to $3,000 in funding to build Pinpoint. It started at QHacks as a student housing idea, then grew through realtor conversations, CFRC Radio, and the Mayor's Innovation Challenge.`,
     date: "2026-05-01",
     url: "https://www.usepinpoint.ca/",

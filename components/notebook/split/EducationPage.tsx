@@ -15,7 +15,7 @@ const EDUCATION = {
   location: "Kingston, ON",
   logoSrc: "/slc.webp",
   note:
-    "Advanced diploma. The classroom part of the arc; the projects, pitches, and startup work are where it gets loud.",
+    "Advanced diploma · Graduated Apr 2026. The classroom part of the arc; the projects, pitches, and startup work are where it gets loud.",
 };
 
 export function EducationPage({

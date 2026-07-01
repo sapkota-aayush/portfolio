@@ -7,9 +7,16 @@ import { useEffect, useState } from "react";
  * V3-stage1 chevron variant but rotated 90°, since the page now flips
  * forward (right-bound), not downward.
  */
-export function ScrollCue({ delay = 3800 }: { delay?: number }) {
-  const [show, setShow] = useState(false);
+export function ScrollCue({
+  delay = 3800,
+  label = "scroll",
+}: {
+  delay?: number;
+  label?: string;
+}) {
+  const [show, setShow] = useState(delay <= 0);
   useEffect(() => {
+    if (delay <= 0) return;
     const t = window.setTimeout(() => setShow(true), delay);
     return () => window.clearTimeout(t);
   }, [delay]);
@@ -34,9 +41,12 @@ export function ScrollCue({ delay = 3800 }: { delay?: number }) {
           letterSpacing: "0.3em",
           color: "var(--color-ink-faint)",
           textTransform: "uppercase",
+          padding: "6px 10px",
+          border: "1px solid color-mix(in srgb, var(--color-ink-faint) 35%, transparent)",
+          background: "color-mix(in srgb, var(--color-paper-warm) 88%, transparent)",
         }}
       >
-        scroll
+        {label}
       </div>
       <svg
         width="28"

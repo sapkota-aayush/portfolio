@@ -94,7 +94,7 @@ const OLLAMA_TOOLS = [
     function: {
       name: "showLeadership",
       description:
-        "Display Aayush's leadership and awards page. Call when the user asks about leadership, awards, Toastmasters, Student Association awards, HackSLC, organizing, or speaking.",
+        "Display Aayush's leadership and awards page. Call when the user asks about leadership, awards, Toastmasters, Student Association awards, HackSLC, SLC college features, organizing, or speaking.",
       parameters: { type: "object", properties: {}, required: [] },
     },
   },
