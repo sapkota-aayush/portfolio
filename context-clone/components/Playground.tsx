@@ -140,6 +140,18 @@ export function Playground() {
             />
           </label>
 
+          {tab === "scrape" ? (
+            <p className="rounded-lg border border-emerald-900/40 bg-emerald-950/30 px-3 py-2 text-sm text-emerald-200">
+              Scrape does <strong>not</strong> need an API key. Paste a URL and click Scrape page.
+            </p>
+          ) : (
+            <p className="rounded-lg border border-amber-900/40 bg-amber-950/30 px-3 py-2 text-sm text-amber-200">
+              Extract needs <code className="text-amber-100">OPENAI_API_KEY</code> in{" "}
+              <code className="text-amber-100">context-clone/.env.local</code>, then restart{" "}
+              <code className="text-amber-100">npm run dev</code>.
+            </p>
+          )}
+
           {tab === "extract" && (
             <>
               <label className="block space-y-2">
@@ -169,10 +181,14 @@ export function Playground() {
             type="button"
             disabled={loading || !url.trim()}
             onClick={tab === "scrape" ? runScrape : runExtract}
-            className="w-full rounded-lg bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-500 disabled:hover:bg-indigo-600"
+            className="w-full cursor-pointer rounded-lg bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? "Working…" : tab === "scrape" ? "Scrape page" : "Extract data"}
           </button>
+
+          {!url.trim() && (
+            <p className="text-xs text-zinc-500">Enter a URL above to enable the button.</p>
+          )}
 
           {error && (
             <p className="rounded-lg border border-red-900/50 bg-red-950/40 px-3 py-2 text-sm text-red-300">
@@ -204,9 +220,10 @@ export function Playground() {
           </li>
         </ul>
         <p className="mt-3">
-          v1 uses fetch + Readability (no JS rendering). Extract requires{" "}
+          <strong className="text-zinc-300">Scrape</strong> — no API key.{" "}
+          <strong className="text-zinc-300">Extract</strong> — needs{" "}
           <code className="text-zinc-500">OPENAI_API_KEY</code> in{" "}
-          <code className="text-zinc-500">.env.local</code>.
+          <code className="text-zinc-500">.env.local</code>. v1 uses fetch + Readability (no JS rendering).
         </p>
       </section>
     </div>

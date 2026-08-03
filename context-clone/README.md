@@ -18,11 +18,17 @@ Minimal learning clone of [Context.dev](https://www.context.dev/) (YC S26): a **
 ```bash
 cd context-clone
 npm install
-cp .env.example .env.local   # add OPENAI_API_KEY for extract
 npm run dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001).
+Open [http://localhost:3001](http://localhost:3001) and use **Scrape Markdown** — no API key needed.
+
+For **Extract JSON** only, add your key:
+
+```bash
+cp .env.example .env.local   # set OPENAI_API_KEY=sk-...
+# restart npm run dev after editing .env.local
+```
 
 ## API
 
